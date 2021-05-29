@@ -1,5 +1,17 @@
-# 重複輸入就需要用到迴圈，不知道要輸入幾次的情況下，適合用while loop
+# 做完下面那堆步驟創好檔案後，來讀取檔案
 products = []
+with open('products.csv', 'r', encoding = 'utf-8') as f:
+	for line in f: # 讀取這個檔案的每一行
+		if '商品,價格' in line: # 表示若遇到的是表頭'商品,價格'，就跳過，再跑下一回
+			continue # 來教continue這個功能，相對於break會直接離開迴圈，continue會跳過這一回，又開始下一回從迴圈第一行開始
+		name, price = line.strip().split(',') # split是切割行的意思，括號內表示碰到括號內東西的時候要換行，先放strip是為了先清掉換行符號
+			# 因為有分割，所以可以直接分別命名分割好的東西
+		products.append([name, price])
+print(products)
+
+
+# 重複輸入就需要用到迴圈，不知道要輸入幾次的情況下，適合用while loop
+# 讓使用者輸入
 while True:
 	name = input('請輸入商品名稱: ')
 	if name == 'q':
@@ -16,6 +28,7 @@ print(products) # 得出用[]包住的成對的[商品, 價格]
 
 products[0][0] #表示product這個大清單的第一個項目也就是第一個p拿出來，又把p這個子清單的第一個項目拿出來，此處在本案例表示第一個商品的名稱
 
+# 印出所有購買紀錄
 for p in products:
 	print(p[0]) # 表示把每一個子清單p的第一個項目從product這個大清單中拿出來，所以會印出每個商品的名稱
 
@@ -23,6 +36,8 @@ for p in products:
 # 'abc' + '123' = 'abc123'
 # 'abc' * 3 = 'abcabcabc'
 
+
+#寫入檔案
 with open('products.csv', 'w', encoding = 'utf-8') as f:  # encoding是編碼的意思 (太複雜不說)
 															# 此處表示要用要使用'utf-8'這個編碼，這是最廣泛使用的編碼
 															# 這個編碼可以讀取大部分的符號
