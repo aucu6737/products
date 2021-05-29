@@ -14,3 +14,6 @@ while True:
 print(products) # 得出用[]包住的成對的[商品, 價格]
 
 products[0][0] #表示product這個大清單的第一個項目也就是第一個p拿出來，又把p這個子清單的第一個項目拿出來，此處在本案例表示第一個商品的名稱
+
+for p in products:
+	print(p[0]) # 表示把每一個子清單p的第一個項目從product這個大清單中拿出來，所以會印出每個商品的名稱
