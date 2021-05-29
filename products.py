@@ -1,13 +1,30 @@
-# 做完下面那堆步驟創好檔案後，來讀取檔案
+import os # os = operating system 作業系統，載入作業系統也就是電腦本身，可以管檔案的所在
+
 products = []
-with open('products.csv', 'r', encoding = 'utf-8') as f:
-	for line in f: # 讀取這個檔案的每一行
-		if '商品,價格' in line: # 表示若遇到的是表頭'商品,價格'，就跳過，再跑下一回
-			continue # 來教continue這個功能，相對於break會直接離開迴圈，continue會跳過這一回，又開始下一回從迴圈第一行開始
-		name, price = line.strip().split(',') # split是切割行的意思，括號內表示碰到括號內東西的時候要換行，先放strip是為了先清掉換行符號
-			# 因為有分割，所以可以直接分別命名分割好的東西
-		products.append([name, price])
-print(products)
+if os.path.isfile('products.csv'): # os的path模組下的isfile功能是檢查本檔案的路徑所在，有沒有product.csv這個檔案
+	print('Yeah! Found!') # TRUE表示找到檔案，執行讀取
+	with open('products.csv', 'r', encoding = 'utf-8') as f:
+		for line in f: # 讀取這個檔案的每一行
+			if '商品,價格' in line: # 表示若遇到的是表頭'商品,價格'，就跳過，再跑下一回
+				continue # 來教continue這個功能，相對於break會直接離開迴圈，continue會跳過這一回，又開始下一回從迴圈第一行開始
+			name, price = line.strip().split(',') # split是切割行的意思，括號內表示碰到括號內東西的時候要換行，先放strip是為了先清掉換行符號
+				# 因為有分割，所以可以直接分別命名分割好的東西
+			products.append([name, price])
+	print(products)
+else:
+	print('File not found...')
+
+
+# 做完下面那堆步驟創好檔案後，來讀取檔案，如果沒有下面先創檔案，就會錯誤訊息
+# products = []
+# with open('products.csv', 'r', encoding = 'utf-8') as f:
+#	for line in f: # 讀取這個檔案的每一行
+#		if '商品,價格' in line: # 表示若遇到的是表頭'商品,價格'，就跳過，再跑下一回
+#			continue # 來教continue這個功能，相對於break會直接離開迴圈，continue會跳過這一回，又開始下一回從迴圈第一行開始
+#		name, price = line.strip().split(',') # split是切割行的意思，括號內表示碰到括號內東西的時候要換行，先放strip是為了先清掉換行符號
+#			# 因為有分割，所以可以直接分別命名分割好的東西
+#		products.append([name, price])
+# print(products)
 
 
 # 重複輸入就需要用到迴圈，不知道要輸入幾次的情況下，適合用while loop
